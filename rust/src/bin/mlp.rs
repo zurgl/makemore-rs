@@ -73,9 +73,6 @@ fn run(device: Device) -> Result<(), String> {
 
     let (stoi, itos) = make_lens(&labels);
 
-    //let n1 = words.len().mul(8).div(10);
-    //let n2 = words.len().mul(9).div(10);
-
     let (xs, ys) = create_dataset(&words, &stoi, device);
     //let (xs_dev, ys_dev) = create_dataset(&words[n1..n2], &stoi);
     //let (xs_test, ys_test) = create_dataset(&words[n2..], &stoi);
