@@ -45,7 +45,7 @@ just mlp
 
 ### Automatic install
 
-If you doesn't have nvidia-cuda gpu compatible driver, then to modify the `Cargo.toml` and uncomment `toch-sys` line. The `torch-sys` build will scan your system and do the job accordinly.
+If you doesn't have nvidia-cuda gpu compatible driver, then modify the `Cargo.toml` and uncomment `toch-sys` line. The `torch-sys` build will scan your system and do the job accordinly.
 
 ```toml
 ...
