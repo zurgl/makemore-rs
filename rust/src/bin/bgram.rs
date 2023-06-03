@@ -29,7 +29,7 @@ fn int_to_char(labels: &BTreeSet<char>) -> impl Fn(u8) -> char {
 }
 
 macro_rules! dim {
-    ($n : expr) => { 
+    ($n : expr) => {
         Some([$n].as_slice())
     };
 }
@@ -47,8 +47,8 @@ fn create_dataset(words: &Vec<String>, labels: &BTreeSet<char>) -> (Tensor, Tens
             ys0.push(ix2);
         }
     }
-    let xs = tch::Tensor::of_slice(&xs0).to_kind(Kind::Float);
-    let ys = tch::Tensor::of_slice(&ys0).to_kind(Kind::Int64);
+    let xs = tch::Tensor::from_slice(&xs0).to_kind(Kind::Float);
+    let ys = tch::Tensor::from_slice(&ys0).to_kind(Kind::Int64);
 
     let num = xs.size();
     println!("number of examples: {:?}", num);
@@ -117,7 +117,7 @@ fn main() -> Result<(), String> {
             let counts = logits.exp();
             let probs =
                 counts.divide(&counts.sum_dim_intlist(Some([0].as_slice()), true, Kind::Float));
-            ix = u8::from(probs.multinomial(1, true));
+            ix = u8::try_from(probs.multinomial(1, true)).expect("cannot cast tensor to u8");
             if ix == 0 {
                 break;
             }

@@ -1,3 +1,4 @@
 rust/target/
 notebook/.ipynb_checkpoints
 python/.ipynb_checkpoint
+libtorch

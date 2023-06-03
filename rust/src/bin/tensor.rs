@@ -8,7 +8,7 @@ fn tensor_from() {
     t1.print();
     println!();
 
-    let t2 = Tensor::of_slice(&[1])
+    let t2 = Tensor::from_slice(&[1])
         .to_kind(Kind::Int64)
         .to_device(Device::Cpu);
     println!("t2: {:?}", t2);
@@ -17,7 +17,7 @@ fn tensor_from() {
     t2.print();
     println!();
 
-    let t3 = Tensor::of_slice(&[1, 2, 3, 4])
+    let t3 = Tensor::from_slice(&[1, 2, 3, 4])
         .to_kind(Kind::Int64)
         .to_device(Device::Cpu);
     println!("t3: {:?}", t3);
@@ -37,13 +37,13 @@ fn tensor_from() {
 }
 
 fn tensor_create() {
-    let zeros_tensor = Tensor::zeros(&[2, 3], (Kind::Int64, Device::Cpu));
+    let zeros_tensor = Tensor::zeros([2, 3], (Kind::Int64, Device::Cpu));
     zeros_tensor.print();
 
-    let ones_tensor = Tensor::ones(&[2, 3], (Kind::Int64, Device::Cpu));
+    let ones_tensor = Tensor::ones([2, 3], (Kind::Int64, Device::Cpu));
     ones_tensor.print();
 
-    let randn_tensor = Tensor::randn(&[2, 3], (Kind::Float, Device::Cpu));
+    let randn_tensor = Tensor::randn([2, 3], (Kind::Float, Device::Cpu));
     randn_tensor.print();
 }
 

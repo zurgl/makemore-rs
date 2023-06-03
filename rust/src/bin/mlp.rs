@@ -52,10 +52,10 @@ fn create_dataset(
     }
 
     (
-        Tensor::of_slice(&xs)
+        Tensor::from_slice(&xs)
             .view([-1, (BLOCK_SIZE as i64)])
             .to_device(device),
-        Tensor::of_slice(&ys).to_device(device),
+        Tensor::from_slice(&ys).to_device(device),
     )
 }
 
@@ -119,17 +119,17 @@ fn run(device: Device) -> Result<(), String> {
     tch::manual_seed(2147483647 + 10);
     for _ in 0..10 {
         let mut output = String::new();
-        let mut context = Tensor::of_slice(&[0i64; BLOCK_SIZE]);
+        let mut context = Tensor::from_slice(&[0i64; BLOCK_SIZE]);
         loop {
             let emb = c.index(&[Some(context.shallow_clone())]);
             let h = Tensor::tanh(&(emb.view((1, -1)).matmul(&w1) + b1.shallow_clone()));
             let logits = h.matmul(&w2) + b2.shallow_clone();
             let probs = logits.softmax(1, Kind::Float);
-            let ix = i64::from(probs.multinomial(1, true));
+            let ix = i64::try_from(probs.multinomial(1, true)).expect("cannot cast tensor to i64");
             if ix == 0i64 {
                 break;
             }
-            context = Tensor::cat(&[context.i(1..), Tensor::of_slice(&[ix])], 0);
+            context = Tensor::cat(&[context.i(1..), Tensor::from_slice(&[ix])], 0);
             output.push(itos(ix));
         }
         println!("{output}");
@@ -149,14 +149,14 @@ fn main() {
 
 #[test]
 fn test_tensor() {
-    let mut context = Tensor::of_slice(&[0i64; BLOCK_SIZE]);
+    let mut context = Tensor::from_slice(&[0i64; BLOCK_SIZE]);
     context.print();
 
-    let x = Tensor::of_slice(&[1i64]);
+    let x = Tensor::from_slice(&[1i64]);
     context = Tensor::cat(&[context.i(1..), x], 0);
     context.print();
 
-    let x = Tensor::of_slice(&[2i64]);
+    let x = Tensor::from_slice(&[2i64]);
     context = Tensor::cat(&[context.i(1..), x], 0);
     context.print();
 }
