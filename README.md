@@ -1,6 +1,6 @@
 # makemore part 2 and 3 from Python to rust
 
-This repo contains a rewrite in rust of the first two parts of the series (bgram and mlp) of [karpathy](https://github.com/karpathy/makemore) about makemore. The goal is to illustrate how to rewrite basic nn from py to rs using a thin wrapper around pytorchC++ (tch crate)
+This repo contains a rewrite in rust of the first two parts of the series (bgram and mlp) of [karpathy](https://github.com/karpathy/makemore) about makemore. The goal is to illustrate how to rewrite basic nn from py to rs using a thin wrapper around libtorch (tch crate)
 
 ## Instructions
 
