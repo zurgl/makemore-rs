@@ -1,4 +1,4 @@
-# makemore part 2 and 3 from Pyton to rust
+# makemore part 2 and 3 from Phyton to rust
 
 This repo contains a rewrite in rust of the first two parts of the series (bgram and mlp) of [karpathy](https://github.com/karpathy/makemore) about makemore. The goal is to illustrate how to rewrite basic nn from py to rs using a thin wrapper around pytorchC++ (tch crate)
 
@@ -45,7 +45,7 @@ just mlp
 
 ### Automatic install
 
-If you doesn't have nvidia-cuda gpu compatible driver, then modify the `Cargo.toml` and uncomment `toch-sys` line. The `torch-sys` build will scan your system and do the job accordinly.
+If you doesn't have nvidia-cuda gpu compatible driver, then modify the `rust/Cargo.toml` and uncomment `toch-sys` line. The `torch-sys` build will scan your system and do the job accordinly.
 
 ```toml
 ...
